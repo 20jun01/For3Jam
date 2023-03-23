@@ -6,6 +6,16 @@ public class OnKeyInput : MonoBehaviour
     private KeyInputReceiver _keyInputReceiver;
     private UIManager _uiManager;
     [SerializeField] private CharacterObject characterObject;
+    private static OnKeyInput _instance;
+    
+    private bool _isGaming = false;
+    
+    public static OnKeyInput Instance {
+        get {
+            if (_instance == null) _instance = FindObjectOfType<OnKeyInput>();
+            return _instance;
+        }
+    }
     
     private void Start()
     {
@@ -15,6 +25,11 @@ public class OnKeyInput : MonoBehaviour
 
     private void Update()
     {
+        if (!_isGaming)
+        {
+            if(_keyInputReceiver.AttackKeyDownInput)
+                _isGaming = _uiManager.SpaceInput();
+        }
         if (_keyInputReceiver.DirectionKeyDownInput[(int) Direction.Right])
         {
             _uiManager.OnDInput();

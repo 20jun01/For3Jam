@@ -22,14 +22,35 @@ public class EnemiesManager : MonoBehaviour
     
     private float _interval;
     private float _time = 0f;
+    private bool _isGaming = false;
+    
+    private static EnemiesManager _instance;
+    
+    public static EnemiesManager Instance {
+        get {
+            if (_instance == null) _instance = FindObjectOfType<EnemiesManager>();
+            return _instance;
+        }
+    }
 
     void Start()
     {
         _interval = GetRandomTime();
     }
+    
+    public void StartGame()
+    {
+        _isGaming = true;
+    }
+    
+    public void EndGame()
+    {
+        _isGaming = false;
+    }
 
     void Update()
     {
+        if (!_isGaming) return;
         _time += Time.deltaTime;
 
         if(_time > _interval)

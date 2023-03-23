@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class CharacterObject : MonoBehaviour
 {
-
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Animator animator;
     [SerializeField] private int moveSpeed;

@@ -9,6 +9,13 @@ public enum Direction {
     Down
 }
 
+public enum GameState
+{
+    Start,
+    Gaming,
+    End
+}
+
 public static class Colors
 {
     public static readonly Color AColor = new Color(210f/255f, 217f/255f, 145f/255f);
