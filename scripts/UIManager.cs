@@ -22,6 +22,11 @@ public class UIManager : MonoBehaviour
         }
     }
     
+    void Start()
+    {
+        backgroundImage.color = Colors.DefaultColor;
+    }
+    
     public async void OnDInput()
     {
         _nowState = Direction.None;
