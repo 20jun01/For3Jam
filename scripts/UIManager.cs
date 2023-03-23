@@ -65,26 +65,32 @@ public class UIManager : MonoBehaviour
         await backgroundImage.DOColor(Colors.SColor, 3f);
         _nowState = Direction.Down;
     }
-    
-    public bool SpaceInput()
-    {
-        if (_gameState == GameState.Start)
-        {
-            _gameState = GameState.Gaming;
-            _enemiesManager.StartGame();
-            StartImage.SetActive(false);
-            return true;
-        }
-        else if (_gameState == GameState.End)
-        {
-            _gameState = GameState.Start;
-            _enemiesManager.EndGame();
-            EndImage.SetActive(false);
-            StartImage.SetActive(true);
-            return false;
-        }
 
-        return true;
+    public void GameStart()
+    {
+        _gameState = GameState.Gaming;
+        _enemiesManager.StartGame();
+        StartImage.SetActive(false);
+    }
+    
+    public void GameEnd()
+    {
+        _gameState = GameState.End;
+        _enemiesManager.EndGame();
+        EndImage.SetActive(true);
+    }
+
+    public void GameTitle()
+    {
+        _gameState = GameState.Start;
+        EndImage.SetActive(false);
+        StartImage.SetActive(true);
+    }
+
+    public void SetGameEnd()
+    {
+        _gameState = GameState.End;
+        EndImage.SetActive(true);
     }
     
     public void Damage()

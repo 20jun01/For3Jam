@@ -18,14 +18,20 @@ public class KeyInputReceiver : MonoBehaviour
     }; 
     
     private KeyCode _attackKeyCode = KeyCode.Space;
+    
+    private KeyCode _enterKeyCode = KeyCode.Return;
 
     private readonly bool[] _directionKeyDownInput = new bool[4];
     
     private bool _attackKeyDownInput = false;
+    
+    private bool _enterInput = false;
 
     public bool[] DirectionKeyDownInput => _directionKeyDownInput;
 
     public bool AttackKeyDownInput => _attackKeyDownInput;
+    
+    public bool EnterInput => _enterInput;
 
     // Update is called once per frame
     void Update()
@@ -40,5 +46,7 @@ public class KeyInputReceiver : MonoBehaviour
                                                       Input.GetKeyDown(_directionKeyCodesWasd[(int)Direction.Down]);
         
         _attackKeyDownInput = Input.GetKeyDown(_attackKeyCode);
+        
+        _enterInput = Input.GetKeyDown(_enterKeyCode);
     }
 }

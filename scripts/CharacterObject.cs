@@ -44,6 +44,10 @@ public class CharacterObject : MonoBehaviour
     public void SetGaming(bool isGaming)
     {
         _isGaming = isGaming;
+        if (!_isGaming)
+        {
+            rb.velocity = Vector2.zero;
+        }
     }
     
     void Update()

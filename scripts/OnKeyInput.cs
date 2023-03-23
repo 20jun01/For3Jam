@@ -6,9 +6,11 @@ public class OnKeyInput : MonoBehaviour
     private KeyInputReceiver _keyInputReceiver;
     private UIManager _uiManager;
     [SerializeField] private CharacterObject characterObject;
+    [SerializeField] private float timeLimits;
     private static OnKeyInput _instance;
-    
-    private bool _isGaming = false;
+
+    private GameState _gameState = GameState.Start;
+    private float _time = 0f;
     
     public static OnKeyInput Instance {
         get {
@@ -25,14 +27,38 @@ public class OnKeyInput : MonoBehaviour
 
     private void Update()
     {
-        if (!_isGaming)
+        if (_gameState == GameState.Start)
         {
             if (_keyInputReceiver.AttackKeyDownInput)
             {
-                _isGaming = _uiManager.SpaceInput();
-                characterObject.SetGaming(_isGaming);
+                _gameState = GameState.Gaming;
+                _uiManager.GameStart();
+                characterObject.SetGaming(true);
             }
         }
+
+        if (_gameState == GameState.End)
+        {
+            if (_keyInputReceiver.EnterInput)
+            {
+                _gameState = GameState.Start;
+                _uiManager.GameTitle();
+                characterObject.SetGaming(false);
+            }
+        }
+        
+        if (_gameState != GameState.Gaming) return;
+
+        _time += Time.deltaTime;
+        
+        if (_time > timeLimits)
+        {
+            _gameState = GameState.End;
+            _time = 0f;
+            characterObject.SetGaming(false);
+            _uiManager.GameEnd();
+        }
+
         if (_keyInputReceiver.DirectionKeyDownInput[(int) Direction.Right])
         {
             _uiManager.OnDInput();
