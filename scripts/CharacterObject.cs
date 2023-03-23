@@ -43,4 +43,9 @@ public class CharacterObject : MonoBehaviour
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, -8.5f, 8.5f), Mathf.Clamp(transform.position.y, -4.6f, 4.6f), transform.position.z);
         animator.SetBool(IsMoving, _isMoving);
     }
+
+    public void Attack()
+    {
+        
+    }
 }
