@@ -18,6 +18,16 @@ public class CharacterObject : MonoBehaviour
     private static readonly int IsFalling = Animator.StringToHash("IsFalling");
     private static readonly int IsJumping = Animator.StringToHash("IsJumping");
     private Direction _nowState;
+    private bool _isGaming = false;
+    //singleton
+    private static CharacterObject _instance;
+
+    public static CharacterObject Instance {
+        get {
+            if (_instance == null) _instance = FindObjectOfType<CharacterObject>();
+            return _instance;
+        }
+    }
 
     void Start()
     {
@@ -31,8 +41,17 @@ public class CharacterObject : MonoBehaviour
         _nowState = direction;
     }
     
+    public void SetGaming(bool isGaming)
+    {
+        _isGaming = isGaming;
+    }
+    
     void Update()
     {
+        if (!_isGaming)
+        {
+            return;
+        }
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         _isMoving = horizontal != 0 || vertical != 0;
@@ -54,6 +73,10 @@ public class CharacterObject : MonoBehaviour
 
     public void Attack(bool[] directionKeyDownInput)
     {
+        if (!_isGaming)
+        {
+            return;
+        }
         // Charaから攻撃を出す
         var attack = Instantiate(attackPrefab);
         attack.transform.position = transform.position;

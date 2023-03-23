@@ -27,8 +27,11 @@ public class OnKeyInput : MonoBehaviour
     {
         if (!_isGaming)
         {
-            if(_keyInputReceiver.AttackKeyDownInput)
+            if (_keyInputReceiver.AttackKeyDownInput)
+            {
                 _isGaming = _uiManager.SpaceInput();
+                characterObject.SetGaming(_isGaming);
+            }
         }
         if (_keyInputReceiver.DirectionKeyDownInput[(int) Direction.Right])
         {
