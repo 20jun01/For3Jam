@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private Image backgroundImage;
+    [SerializeField] private CharacterObject characterObject;
     //singleton
     private static UIManager _instance;
     private Direction _nowState = Direction.None;
@@ -56,9 +57,9 @@ public class UIManager : MonoBehaviour
         _nowState = Direction.Down;
     }
     
-    public async void OnSpaceInput()
+    public async void OnSpaceInput(bool[] directionKeyDownInput)
     {
-        Debug.Log("Space");
+        characterObject.Attack(_nowState, directionKeyDownInput);
     }
 
     public void Damage()

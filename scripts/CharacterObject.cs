@@ -1,3 +1,5 @@
+using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CapsuleCollider2D))]
@@ -9,6 +11,7 @@ public class CharacterObject : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Animator animator;
     [SerializeField] private int moveSpeed;
+    [SerializeField] private GameObject attackPrefab;
     private bool _isMoving = false;
     private bool _isFalling = false;
     private bool _isJumping = false;
@@ -44,8 +47,47 @@ public class CharacterObject : MonoBehaviour
         animator.SetBool(IsMoving, _isMoving);
     }
 
-    public void Attack()
+    public void Attack(Direction nowState, bool[] directionKeyDownInput)
     {
+        // Charaから攻撃を出す
+        var attack = Instantiate(attackPrefab);
+        attack.transform.position = transform.position;
+        attack.transform.localScale = transform.localScale;
+        // nowStateでColorを決める
+        var color = Colors.GetColor(nowState);
+        attack.GetComponent<SpriteRenderer>().color = color;
+        attack.GetComponent<AttackObject>().SetColor(nowState);
         
+        var direction = ConvertDirection(directionKeyDownInput);
+        
+        attack.gameObject.transform.DOMove(direction, 10f).SetRelative().SetLoops(-1, LoopType.Incremental);
+    }
+    
+    private Vector2 ConvertDirection(bool[] directionKeyDownInput)
+    {
+        var direction = new Vector2(0, 0);
+        if (directionKeyDownInput[0])
+        {
+            direction.y += 1;
+        }
+        if (directionKeyDownInput[1])
+        {
+            direction.x += 1;
+        }
+        if (directionKeyDownInput[2])
+        {
+            direction.y -= 1;
+        }
+        if (directionKeyDownInput[3])
+        {
+            direction.x -= 1;
+        }
+        
+        if (direction.x == 0 && direction.y == 0)
+        {
+            direction.x = 1;
+        }
+        
+        return direction;
     }
 }

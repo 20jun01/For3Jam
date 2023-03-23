@@ -36,7 +36,7 @@ public class OnKeyInput : MonoBehaviour
         
         if (_keyInputReceiver.AttackKeyDownInput)
         {
-            _uiManager.OnSpaceInput();
+            _uiManager.OnSpaceInput(_keyInputReceiver.DirectionKeyDownInput);
         }
     }
 }

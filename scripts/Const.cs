@@ -31,4 +31,13 @@ public static class Colors
         };
         return (randomDirection, randomColor);
     }
+    
+    public static Color GetColor(Direction direction) => direction switch
+    {
+        Direction.Right => DColor,
+        Direction.Up => WColor,
+        Direction.Left => AColor,
+        Direction.Down => SColor,
+        _ => throw new ArgumentOutOfRangeException()
+    };
 }
