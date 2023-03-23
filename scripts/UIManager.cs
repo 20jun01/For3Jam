@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     //singleton
     private static UIManager _instance;
     private Direction _nowState = Direction.None;
+    private Counter _counter;
 
     public Direction NowState
     {
@@ -26,6 +27,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         backgroundImage.color = Colors.DefaultColor;
+        _counter = Counter.Instance;
     }
     
     public async void OnDInput()
@@ -56,18 +58,13 @@ public class UIManager : MonoBehaviour
         _nowState = Direction.Down;
     }
     
-    public async void OnSpaceInput(bool[] directionKeyDownInput)
-    {
-        
-    }
-
     public void Damage()
     {
-        Debug.Log("Damage");
+        _counter.AddCount(-1);
     }
 
     public void Score()
     {
-        Debug.Log("Score");
+        _counter.AddCount(1);
     }
 }
