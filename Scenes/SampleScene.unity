@@ -137,9 +137,9 @@ GameObject:
   - component: {fileID: 459519438}
   - component: {fileID: 459519437}
   - component: {fileID: 459519436}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: 1x_0
-  m_TagString: Untagged
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -482,6 +482,7 @@ GameObject:
   - component: {fileID: 1127994895}
   - component: {fileID: 1127994894}
   - component: {fileID: 1127994893}
+  - component: {fileID: 1127994896}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -576,6 +577,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52042a53af71a45e6a0641170444f94e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1127994896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127994889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10d64dd546c7747608b8624f036a5e5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 7536102972805504836, guid: e7f8f4d52d01f45898902922305f4aed, type: 3}
+  minTime: 0.3
+  maxTime: 2
+  xMinPosition: -8.5
+  xMaxPosition: 8.5
+  yMinPosition: -4.6
+  yMaxPosition: 4.6
 --- !u!1 &1195106550
 GameObject:
   m_ObjectHideFlags: 0

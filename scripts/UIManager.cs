@@ -1,3 +1,4 @@
+using System;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -34,29 +35,34 @@ public class UIManager : MonoBehaviour
         _nowState = Direction.Right;
     }
     
-    public void OnWInput()
+    public async void OnWInput()
     {
         _nowState = Direction.None;
         backgroundImage.DOColor(Colors.WColor, 3f);
         _nowState = Direction.Up;
     }
     
-    public void OnAInput()
+    public async void OnAInput()
     {
         _nowState = Direction.None;
-        backgroundImage.DOColor(Colors.AColor, 3f);
+        await backgroundImage.DOColor(Colors.AColor, 3f);
         _nowState = Direction.Left;
     }
     
-    public void OnSInput()
+    public async void OnSInput()
     {
         _nowState = Direction.None;
         backgroundImage.DOColor(Colors.SColor, 3f);
         _nowState = Direction.Down;
     }
     
-    public void OnSpaceInput()
+    public async void OnSpaceInput()
     {
         Debug.Log("Space");
+    }
+
+    public void Damage()
+    {
+        Debug.Log("Damage");
     }
 }
