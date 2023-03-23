@@ -246,6 +246,7 @@ MonoBehaviour:
   rb: {fileID: 459519438}
   animator: {fileID: 459519433}
   moveSpeed: 3
+  attackPrefab: {fileID: 1671066499203022000, guid: 3aed21c318c20451ea7424eb887533cd, type: 3}
 --- !u!70 &459519437
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -565,6 +566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c17a38e85f54a3eb8e29abc4286d523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterObject: {fileID: 459519436}
 --- !u!114 &1127994895
 MonoBehaviour:
   m_ObjectHideFlags: 0

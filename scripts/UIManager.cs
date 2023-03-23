@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private Image backgroundImage;
-    [SerializeField] private CharacterObject characterObject;
     //singleton
     private static UIManager _instance;
     private Direction _nowState = Direction.None;
@@ -39,7 +38,7 @@ public class UIManager : MonoBehaviour
     public async void OnWInput()
     {
         _nowState = Direction.None;
-        backgroundImage.DOColor(Colors.WColor, 3f);
+        await backgroundImage.DOColor(Colors.WColor, 3f);
         _nowState = Direction.Up;
     }
     
@@ -53,17 +52,22 @@ public class UIManager : MonoBehaviour
     public async void OnSInput()
     {
         _nowState = Direction.None;
-        backgroundImage.DOColor(Colors.SColor, 3f);
+        await backgroundImage.DOColor(Colors.SColor, 3f);
         _nowState = Direction.Down;
     }
     
     public async void OnSpaceInput(bool[] directionKeyDownInput)
     {
-        characterObject.Attack(_nowState, directionKeyDownInput);
+        
     }
 
     public void Damage()
     {
         Debug.Log("Damage");
+    }
+
+    public void Score()
+    {
+        Debug.Log("Score");
     }
 }

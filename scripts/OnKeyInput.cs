@@ -5,6 +5,7 @@ public class OnKeyInput : MonoBehaviour
 {
     private KeyInputReceiver _keyInputReceiver;
     private UIManager _uiManager;
+    [SerializeField] private CharacterObject characterObject;
     
     private void Start()
     {
@@ -17,26 +18,30 @@ public class OnKeyInput : MonoBehaviour
         if (_keyInputReceiver.DirectionKeyDownInput[(int) Direction.Right])
         {
             _uiManager.OnDInput();
+            characterObject.SetDirection(Direction.Right);
         }
         
         if (_keyInputReceiver.DirectionKeyDownInput[(int) Direction.Up])
         {
             _uiManager.OnWInput();
+            characterObject.SetDirection(Direction.Up);
         }
         
         if (_keyInputReceiver.DirectionKeyDownInput[(int) Direction.Left])
         {
             _uiManager.OnAInput();
+            characterObject.SetDirection(Direction.Left);
         }
         
         if (_keyInputReceiver.DirectionKeyDownInput[(int) Direction.Down])
         {
             _uiManager.OnSInput();
+            characterObject.SetDirection(Direction.Down);
         }
         
         if (_keyInputReceiver.AttackKeyDownInput)
         {
-            _uiManager.OnSpaceInput(_keyInputReceiver.DirectionKeyDownInput);
+            characterObject.Attack(_keyInputReceiver.DirectionKeyDownInput);
         }
     }
 }

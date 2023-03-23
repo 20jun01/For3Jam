@@ -18,12 +18,18 @@ public class CharacterObject : MonoBehaviour
     private static readonly int IsMoving = Animator.StringToHash("IsMoving");
     private static readonly int IsFalling = Animator.StringToHash("IsFalling");
     private static readonly int IsJumping = Animator.StringToHash("IsJumping");
+    private Direction _nowState;
 
     void Start()
     {
-        
         animator.SetBool(IsFalling, _isFalling);
         animator.SetBool(IsJumping, _isJumping);
+        _nowState = Direction.Right;
+    }
+    
+    public void SetDirection(Direction direction)
+    {
+        _nowState = direction;
     }
     
     void Update()
@@ -47,38 +53,41 @@ public class CharacterObject : MonoBehaviour
         animator.SetBool(IsMoving, _isMoving);
     }
 
-    public void Attack(Direction nowState, bool[] directionKeyDownInput)
+    public void Attack(bool[] directionKeyDownInput)
     {
         // Charaから攻撃を出す
         var attack = Instantiate(attackPrefab);
         attack.transform.position = transform.position;
         attack.transform.localScale = transform.localScale;
         // nowStateでColorを決める
-        var color = Colors.GetColor(nowState);
+        var color = Colors.GetColor(_nowState);
         attack.GetComponent<SpriteRenderer>().color = color;
-        attack.GetComponent<AttackObject>().SetColor(nowState);
+        attack.GetComponent<AttackObject>().SetColor(_nowState);
         
         var direction = ConvertDirection(directionKeyDownInput);
-        
-        attack.gameObject.transform.DOMove(direction, 10f).SetRelative().SetLoops(-1, LoopType.Incremental);
+
+        direction.x *= 20f;
+        direction.y *= 20f;
+
+        attack.gameObject.transform.DOMove(direction, 10f).SetRelative();
     }
     
     private Vector2 ConvertDirection(bool[] directionKeyDownInput)
     {
         var direction = new Vector2(0, 0);
-        if (directionKeyDownInput[0])
+        if (directionKeyDownInput[(int)Direction.Up])
         {
             direction.y += 1;
         }
-        if (directionKeyDownInput[1])
+        if (directionKeyDownInput[(int)Direction.Right])
         {
             direction.x += 1;
         }
-        if (directionKeyDownInput[2])
+        if (directionKeyDownInput[(int)Direction.Down])
         {
             direction.y -= 1;
         }
-        if (directionKeyDownInput[3])
+        if (directionKeyDownInput[(int)Direction.Left])
         {
             direction.x -= 1;
         }
